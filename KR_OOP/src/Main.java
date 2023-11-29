@@ -45,5 +45,37 @@ class Main {
             }
             System.out.println(":X" + i + " Y" + i);
         }
+
+//        double moduleNumbers = moduleVector(vectorCD);
+//        System.out.println(moduleNumbers);
+//        int[] coordinateCD=vectorCoordinates(vectorCD);
+//        for(int i=0;i< coordinateCD.length;i++){
+//            System.out.print(coordinateCD[i]+" ");
+//        }
+
     }
+
+    //Присваивание
+
+    //высчет модуля вектора 2 пункт
+    public static double moduleVector(int vector[][]) {
+        double modul = (double) Math.sqrt((int) Math.pow((vector[0][0] - vector[1][0]), 2) + (int) Math.pow((vector[0][1] - vector[1][1]), 2));
+        return modul;
+    }
+    //Высчет скалярного произведения векторов 3 пункт
+    public static int scalarProduct (int vector1[][],int vector2[][]){
+        int [] coordinate1=vectorCoordinates(vector1);
+        int [] coordinate2=vectorCoordinates(vector2);
+        int scalar=coordinate1[0]*coordinate2[0]+coordinate1[1]*coordinate2[1];
+        return scalar;
+    }
+    //Высчет координат по точкам  4 пункт
+    public static int[] vectorCoordinates(int vector[][]) {
+        int[] coordinate = new int[2];
+        coordinate[0] = vector[1][0] - vector[0][0];
+        coordinate[1] = vector[1][1] - vector[0][1];
+
+        return coordinate;
+    }
+
 }
