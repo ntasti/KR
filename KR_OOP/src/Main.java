@@ -52,10 +52,15 @@ class Main {
 //        for(int i=0;i< coordinateCD.length;i++){
 //            System.out.print(coordinateCD[i]+" ");
 //        }
+//vectorAB=assignmentPoints(vectorCD);
 
     }
 
     //Присваивание
+    public static int[][] assignmentPoints(int vector[][]){
+        int vectorNew[][]=vector;
+        return vector;
+    }
 
     //высчет модуля вектора 2 пункт
     public static double moduleVector(int vector[][]) {
