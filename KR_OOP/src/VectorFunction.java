@@ -3,44 +3,44 @@ import java.util.Arrays;
 
 public class VectorFunction {
     Scanner scanner = new Scanner(System.in);
-    public int[][] pointVectorAB = {{0, 0}, {1, 1}};
-    public int[][] pointVectorCD = new int[2][2];
-    public int[] coordinateAB = new int[2];
-    public int[] coordinateCD = new int[2];
+    private int[][] pointVectorAB = {{0, 0}, {1, 1}};
+    private int[][] pointVectorCD = new int[2][2];
+    private int[] coordinateAB = new int[2];
+    private int[] coordinateCD = new int[2];
     private int data;
 
-    //Конструктор
+    //Конструктор класса VectorFunction,где реализована инициализация через метод
     public VectorFunction(int data) {
         this.data = data;
         InitializationData(data);
     }
 
-    //Инициализация
+    //Метод инициализации,где переменные ил вводятся с клавиатуры
+    //или рандомно генирируются каждый раз
     public void InitializationData(int data) {
         switch (data) {
             case 1:
-                System.out.println("Координаты вектора AB X0 Y0 ={0,0} .Введите координаты X1 Y1 ");
+                System.out.println("Точки вектора AB X0 Y0 ={0,0} .Введите точки X1 Y1 ");
                 pointVectorAB = OutputCoordinateAB(pointVectorAB);
-                System.out.println("координаты вектора AB");
+                System.out.println("точки вектора AB");
                 Output(pointVectorAB);
-                System.out.println("Введите координаты X0 Y0 и X1 Y1 для вектоар CD");
+                System.out.println("Введите точки X0 Y0 и X1 Y1 для вектоар CD");
                 pointVectorCD = OutputCoordinateCD(pointVectorCD);
-                System.out.println("координаты вектора CD");
+                System.out.println("точки вектора CD");
                 Output(pointVectorCD);
-
                 break;
             case 2:
                 pointVectorAB = OutputCoordinateRandomAB(pointVectorAB);
-                System.out.println("координаты вектора AB");
+                System.out.println("точки вектора AB");
                 Output(pointVectorAB);
                 pointVectorCD = OutputCoordinateRandomCD(pointVectorCD);
-                System.out.println("координаты вектора CD");
+                System.out.println("точки вектора CD");
                 Output(pointVectorCD);
                 break;
         }
     }
 
-    //Вывод точек вектора
+    //Функция которая выводит точки вектора в консоль
     public void Output(int[][] pointVector) {
         for (int i = 0; i < pointVector.length; i++) {
             for (int u = 0; u < pointVector.length; u++) {
@@ -50,16 +50,14 @@ public class VectorFunction {
         }
     }
 
-    //Заполнение с клавиатуры AB
+    //Заполнение с клавиатуры точек вектора AB
     public int[][] OutputCoordinateAB(int[][] pointVector) {
-        for (int u = 0; u < pointVector.length; u++) {
-
+        for (int u = 0; u < pointVector.length; u++)
             pointVector[1][u] = scanner.nextInt();
-        }
         return pointVector;
     }
 
-    //Заполнение с клавиатуры CD
+    //Заполнение с клавиатуры точек вектора CD
     public int[][] OutputCoordinateCD(int[][] pointVector) {
         for (int i = 0; i < pointVector.length; i++) {
 
@@ -71,7 +69,7 @@ public class VectorFunction {
         return pointVector;
     }
 
-    //Заполнение рандом AB
+    //Заполнение рандомно точек вектора  AB
     public int[][] OutputCoordinateRandomAB(int[][] pointVector) {
         Random random = new Random();//функция рандом
         for (int u = 0; u < pointVector.length; u++) {
@@ -80,7 +78,7 @@ public class VectorFunction {
         return pointVector;
     }
 
-    //Заполнение рандом СD
+    //Заполнение рандомно точек вектора СD
     public int[][] OutputCoordinateRandomCD(int[][] pointVector) {
         Random random = new Random();//функция рандом
         for (int i = 0; i < pointVector.length; i++) {
@@ -91,16 +89,24 @@ public class VectorFunction {
     }
 
     ////ФУНКЦИИ
+
+    //метод в котором через switch-case вызываются функции
     public void function(int function) {
         switch (function) {
             case 1:
-                System.out.println("Присвоить данные вектора AB вектору CD:");
-                assignmentPoints(pointVectorAB);
+                System.out.println("Присвоить данные вектора АВ вектору CD:");
+                pointVectorCD=assignmentPoints(pointVectorAB);
+                System.out.println("Вектор AВ:");
                 Output(pointVectorAB);
+                System.out.println("Вектор СD:");
+                Output(pointVectorCD);
                 break;
             case 2:
                 System.out.println("Присвоить данные вектора  CD в AB:");
-                pointVectorCD = assignmentPoints(pointVectorAB);
+                pointVectorAB = assignmentPoints(pointVectorCD);
+                System.out.println("Вектор AВ:");
+                Output(pointVectorAB);
+                System.out.println("Вектор СD:");
                 Output(pointVectorCD);
                 break;
             case 3:
@@ -133,20 +139,20 @@ public class VectorFunction {
         }
     }
 
-    //Присваивание
+    //Функция присваивания
     public int[][] assignmentPoints(int vector1[][]) {
 
         int vector[][] = vector1;
         return vector;
     }
 
-    //высчет модуля вектора 2 пункт
+    //высчет модуля вектора
     public double moduleVector(int vector[][]) {
         double modul = (double) Math.sqrt((int) Math.pow((vector[0][0] - vector[1][0]), 2) + (int) Math.pow((vector[0][1] - vector[1][1]), 2));
         return modul;
     }
 
-    //Высчет скалярного произведения векторов 3 пункт
+    //Высчет скалярного произведения векторов
     public int scalarProduct(int vector1[][], int vector2[][]) {
         int[] coordinate1 = vectorCoordinates(vector1);
         int[] coordinate2 = vectorCoordinates(vector2);
@@ -154,7 +160,7 @@ public class VectorFunction {
         return scalar;
     }
 
-    //Высчет координат по точкам  4 пункт
+    //Высчет координат по точкам
     public int[] vectorCoordinates(int vector[][]) {
         int[] coordinate = new int[2];
         coordinate[0] = vector[1][0] - vector[0][0];
