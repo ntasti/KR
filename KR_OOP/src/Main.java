@@ -6,10 +6,10 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         String textBeg = """
-        Заполнить точки вектора с клавитуры или рандомно?");
-        1.C клавиатуры
-        2.Рандомно
-        """;
+                Заполнить точки вектора с клавитуры или рандомно?");
+                1.C клавиатуры
+                2.Рандомно
+                """;
         System.out.println(textBeg);
 
         VectorFunction vectorAB = new VectorFunction(scanner.nextInt());
@@ -31,7 +31,7 @@ public class Main {
             vectorAB.function(scanner.nextInt());
             System.out.println("Нажмите 0 для повторения ");
             System.out.println("Нажмите любую кнопку,чтоб завершить программу ");
-            //Cчитывание символа с клавиатуры 
+            //Cчитывание символа с клавиатуры
             input = scanner.next().charAt(0);
         } while (input == '0');
     }

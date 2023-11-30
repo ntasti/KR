@@ -95,7 +95,7 @@ public class VectorFunction {
         switch (function) {
             case 1:
                 System.out.println("Присвоить данные вектора АВ вектору CD:");
-                pointVectorCD=assignmentPoints(pointVectorAB);
+                pointVectorCD = assignmentPoints(pointVectorAB);
                 System.out.println("Вектор AВ:");
                 Output(pointVectorAB);
                 System.out.println("Вектор СD:");
