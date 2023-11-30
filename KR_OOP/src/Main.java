@@ -1,86 +1,63 @@
-import java.sql.SQLOutput;
-import java.util.*;
+import java.util.Scanner;
+import java.util.Arrays;
 
 class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         //Создание  вектора AB черeз  двумерный масив, где vector[x1=0 y1=0] по умолчанию,точку [x2 y2] вводим с клавиатуры
-        System.out.println("Координаты вектора CD X0 Y0 ={0,0} .Введите координаты X1 Y1 ");
-        int[][] vectorAB = new int[2][2];
-        vectorAB[0][0] = 0;
-        vectorAB[0][1] = 0;
-
-        for (int u = 0; u < vectorAB.length; u++) {
-            vectorAB[1][u] = scanner.nextInt();
+        System.out.println("Координаты вектора AB X0 Y0 ={0,0} .Введите координаты X1 Y1 ");
+        VectorFunction vectorAB = new VectorFunction();
+        vectorAB.pointVectorAB = new int[2][2];
+        vectorAB.pointVectorAB[0][0] = 0;
+        vectorAB.pointVectorAB[0][1] = 0;
+        for (int u = 0; u < vectorAB.pointVectorAB.length; u++) {
+            vectorAB.pointVectorAB[1][u] = scanner.nextInt();
         }
-
-
-//Создание произвольного вектора СD черз  двумерный масив, где vector[x1 y1][x2 y2]
-        System.out.println("Введите координаты X0 Y0 и X1 Y1 для вектоар CD");
-        int[][] vectorCD = new int[2][2];
-        for (int i = 0; i < vectorCD.length; i++) {
-
-            for (int u = 0; u < vectorCD.length; u++) {
-
-                vectorCD[i][u] = scanner.nextInt();
-            }
-
-        }
-
-        //координаты вектора AB
+        //Вывод точек  вектора AB
         System.out.println("координаты вектора AB");
-        for (int i = 0; i < vectorAB.length; i++) {
-            for (int u = 0; u < vectorAB.length; u++) {
-                System.out.print(vectorAB[i][u] + " ");
+        for (int i = 0; i < vectorAB.pointVectorAB.length; i++) {
+            for (int u = 0; u < vectorAB.pointVectorAB.length; u++) {
+                System.out.print(vectorAB.pointVectorAB[i][u] + " ");
             }
             System.out.println(":X" + i + " Y" + i);
         }
+        //Создание  вектора CD черeз  двумерный масив
+        System.out.println("Введите координаты X0 Y0 и X1 Y1 для вектоар CD");
+        VectorFunction vectorCD = new VectorFunction();
+        vectorCD.pointVectorCD = new int[2][2];
+        for (int i = 0; i < vectorCD.pointVectorCD.length; i++) {
 
-        //координаты вектора СD
+            for (int u = 0; u < vectorCD.pointVectorCD.length; u++) {
+
+                vectorCD.pointVectorCD[i][u] = scanner.nextInt();
+            }
+        }
+        // Вывод точек  вектора СD
         System.out.println("координаты вектора СD");
-        for (int i = 0; i < vectorCD.length; i++) {
-            for (int u = 0; u < vectorCD.length; u++) {
-                System.out.print(vectorCD[i][u] + " ");
+        for (int i = 0; i < vectorCD.pointVectorCD.length; i++) {
+            for (int u = 0; u < vectorCD.pointVectorCD.length; u++) {
+                System.out.print(vectorCD.pointVectorCD[i][u] + " ");
             }
             System.out.println(":X" + i + " Y" + i);
         }
 
-//        double moduleNumbers = moduleVector(vectorCD);
-//        System.out.println(moduleNumbers);
-//        int[] coordinateCD=vectorCoordinates(vectorCD);
-//        for(int i=0;i< coordinateCD.length;i++){
-//            System.out.print(coordinateCD[i]+" ");
-//        }
-//vectorAB=assignmentPoints(vectorCD);
-
+        //Переноc данных из одного веrтора во второй
+        vectorAB.pointVectorAB = vectorAB.assignmentPoints(vectorCD.pointVectorCD);
+        //Характеристи вектора AB
+        // Модуль
+        System.out.println("Модуль вектора AB " + vectorAB.moduleVector(vectorAB.pointVectorAB));
+        //Скалярное произведение векторов
+        System.out.println("Скалярное произведение " + vectorAB.scalarProduct(vectorAB.pointVectorAB, vectorCD.pointVectorCD));
+        //Высчет и выввод координат   по точкам
+        System.out.println("Координаты вектора " + Arrays.toString(vectorAB.vectorCoordinates(vectorCD.pointVectorCD)));
+        //Вывод точек  вектора AB
+        System.out.println("координаты вектора AB");
+        for (int i = 0; i < vectorAB.pointVectorAB.length; i++) {
+            for (int u = 0; u < vectorAB.pointVectorAB.length; u++) {
+                System.out.print(vectorAB.pointVectorAB[i][u] + " ");
+            }
+            System.out.println(":X" + i + " Y" + i);
+        }
     }
-
-    //Присваивание
-    public static int[][] assignmentPoints(int vector[][]){
-        int vectorNew[][]=vector;
-        return vector;
-    }
-
-    //высчет модуля вектора 2 пункт
-    public static double moduleVector(int vector[][]) {
-        double modul = (double) Math.sqrt((int) Math.pow((vector[0][0] - vector[1][0]), 2) + (int) Math.pow((vector[0][1] - vector[1][1]), 2));
-        return modul;
-    }
-    //Высчет скалярного произведения векторов 3 пункт
-    public static int scalarProduct (int vector1[][],int vector2[][]){
-        int [] coordinate1=vectorCoordinates(vector1);
-        int [] coordinate2=vectorCoordinates(vector2);
-        int scalar=coordinate1[0]*coordinate2[0]+coordinate1[1]*coordinate2[1];
-        return scalar;
-    }
-    //Высчет координат по точкам  4 пункт
-    public static int[] vectorCoordinates(int vector[][]) {
-        int[] coordinate = new int[2];
-        coordinate[0] = vector[1][0] - vector[0][0];
-        coordinate[1] = vector[1][1] - vector[0][1];
-
-        return coordinate;
-    }
-
 }
